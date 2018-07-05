@@ -1,4 +1,4 @@
-package pojo;
+package com.ramonfernandes.pojo;
 
 public class Customer implements FileObject {
     private String cpf;
@@ -18,5 +18,13 @@ public class Customer implements FileObject {
     public Customer setSalary(double salary){
         this.salary = salary;
         return this;
+    }
+
+    @Override
+    public FileObject buildObject(String[] separatedString) {
+        return this
+                .setCPF(separatedString[1])
+                .setName(separatedString[2])
+                .setSalary(Double.parseDouble(separatedString[3]));
     }
 }

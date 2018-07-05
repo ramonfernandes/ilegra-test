@@ -1,7 +1,7 @@
-import pojo.Customer;
-import factory.Factory;
-import pojo.Sale;
-import pojo.Salesman;
+import com.ramonfernandes.pojo.Customer;
+import com.ramonfernandes.factory.Factory;
+import com.ramonfernandes.pojo.Sale;
+import com.ramonfernandes.pojo.Salesman;
 import org.junit.Before;
 import org.junit.Test;
 
