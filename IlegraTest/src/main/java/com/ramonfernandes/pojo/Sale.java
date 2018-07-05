@@ -34,11 +34,13 @@ public class Sale implements FileObject {
 
     @Override
     public FileObject buildObject(String[] separatedString) {
-        for (String separatedSale : separatedString[1].split(",")) {
+        for (String separatedSale : separatedString[2].split(",")) {
+            separatedSale = separatedSale.replace("[", "");
+            separatedSale = separatedSale.replace("]", "");
             soldItems.add((ItemSold) new ItemSold().buildObject(separatedSale.split("-")));
         }
         return this
-                .setSaleID(Integer.parseInt(separatedString[0]))
-                .setSalesman(separatedString[2]);
+                .setSaleID(Integer.parseInt(separatedString[1]))
+                .setSalesman(separatedString[3]);
     }
 }

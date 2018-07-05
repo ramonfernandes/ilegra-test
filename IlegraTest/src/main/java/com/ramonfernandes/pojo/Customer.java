@@ -1,12 +1,12 @@
 package com.ramonfernandes.pojo;
 
 public class Customer implements FileObject {
-    private String cpf;
+    private String cnpj;
     private String name;
-    private double salary;
+    private String businessArea;
 
-    public Customer setCPF(String cpf){
-        this.cpf = cpf;
+    public Customer setCNPJ(String cpf){
+        this.cnpj = cnpj;
         return this;
     }
 
@@ -15,16 +15,16 @@ public class Customer implements FileObject {
         return this;
     }
 
-    public Customer setSalary(double salary){
-        this.salary = salary;
+    public Customer setBusinessArea(String businessArea){
+        this.businessArea = businessArea;
         return this;
     }
 
     @Override
     public FileObject buildObject(String[] separatedString) {
         return this
-                .setCPF(separatedString[1])
+                .setCNPJ(separatedString[1])
                 .setName(separatedString[2])
-                .setSalary(Double.parseDouble(separatedString[3]));
+                .setBusinessArea(separatedString[3]);
     }
 }

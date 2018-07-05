@@ -1,21 +1,37 @@
 package com.ramonfernandes.filereader;
 
 import com.ramonfernandes.factory.Factory;
+import com.ramonfernandes.pojo.FileObject;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class InternalFileReader {
 
-    public boolean readFile(String fileName){
+    private static InternalFileReader internalFileReader = new InternalFileReader();
+
+    public static InternalFileReader getInstanceOf() {
+        return internalFileReader;
+    }
+
+    public void getNewFilesOnFolder(final File folder) {
+        for (final File fileEntry : folder.listFiles()) {
+            if (readFile(folder.getPath() + "\\" + fileEntry.getName()))
+                System.out.println("File: " + folder.getName() + fileEntry + " succesfully storaged ");
+        }
+    }
+
+    public boolean readFile(String filePath) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-            while(line != null)
-                for (String subLine: line.split(" "))
-                    createPojoFromLine(subLine);
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(filePath), "ISO-8859-1"));
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                line = line.replace(" 00", "@00");
+                for (String subLine : line.split("@"))
+                    if (!createPojoFromLine(subLine))
+                        return false;
+                line = bufferedReader.readLine();
+            }
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -23,8 +39,10 @@ public class InternalFileReader {
         }
     }
 
-    public void createPojoFromLine(String line){
+    public boolean createPojoFromLine(String line) {
         String[] separatedString = line.split("ç");
-        Factory.getInstanceOfFactory().getInstanceOfFile(separatedString[0]);
+        FileObject file = Factory.getInstanceOfFactory().getInstanceOfFile(separatedString[0]);
+        file.buildObject(separatedString);
+        return true;
     }
 }
