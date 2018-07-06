@@ -29,7 +29,7 @@ public class InternalFileWriter {
                 + "Número de Vendedores no Arquivo: " + amountSalesman +"\n"
                 + "Venda mais cara da história: " + SaleCollection.getMostExpensiveSale().getSaleID() + "\n"
                 + "Pior vendedor da história: " + SaleCollection.getWorstSalesmanEver().getName();
-        String pathString = Setup.SUBDIRECTORY_OUT_FOLDER + fileName;
+        String pathString = Setup.SUBDIRECTORY_OUT_FOLDER + (fileName).replace(".dat",".done.dat");
         Path file = Paths.get(pathString);
         byte[] buffer = result.getBytes();
             Files.write(file, buffer);
