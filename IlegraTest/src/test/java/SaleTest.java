@@ -21,10 +21,6 @@ public class SaleTest {
     @Before
     public void setup(){
         factory = Factory.getInstanceOfFactory();
-    }
-
-    @Test
-    public void worstSalesmanTest(){
         salesman1 = new Salesman().setCnpj("00000000000").setName("Pedro").setSalary("1000");
         salesman2 = new Salesman().setCnpj("00000000001").setName("Zeca").setSalary("1000");
         salesman3 = new Salesman().setCnpj("00000000002").setName("Joca").setSalary("1000");
@@ -33,24 +29,31 @@ public class SaleTest {
         SalesmanCollection.addSalesman(salesman2);
         SalesmanCollection.addSalesman(salesman3);
 
-
         sale1 = new Sale().setSaleID(0).setSalesman("Pedro");
         String itemBuilder = "0-1-100";
         sale1.addItemSold((ItemSold) new ItemSold().buildObject(itemBuilder.split("-")));
 
-        sale2 = new Sale().setSaleID(0).setSalesman("Zeca");
-        itemBuilder = "0-2-100";
+        sale2 = new Sale().setSaleID(1).setSalesman("Zeca");
+        itemBuilder = "2-2-100";
         sale2.addItemSold((ItemSold) new ItemSold().buildObject(itemBuilder.split("-")));
 
-        sale3 = new Sale().setSaleID(0).setSalesman("Joca");
-        itemBuilder = "0-3-100";
+        sale3 = new Sale().setSaleID(2).setSalesman("Joca");
+        itemBuilder = "3-3-100";
         sale3.addItemSold((ItemSold) new ItemSold().buildObject(itemBuilder.split("-")));
 
         SaleCollection.addSale(sale1);
         SaleCollection.addSale(sale2);
         SaleCollection.addSale(sale3);
+    }
 
+    @Test
+    public void worstSalesmanTest(){
         assert(SaleCollection.getWorstSalesmanEver().getName().equals("Pedro"));
+    }
+
+    @Test
+    public void bestSaleTest(){
+        assert(SaleCollection.getMostExpensiveSale().getSaleID() == 2);
     }
 
 }
