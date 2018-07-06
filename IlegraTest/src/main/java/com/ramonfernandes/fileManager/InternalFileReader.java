@@ -15,19 +15,16 @@ public class InternalFileReader {
         return internalFileReader;
     }
 
-    public void getNewFilesOnFolder(final File folder) {
-        for (final File fileEntry : folder.listFiles()) {
-            if (readFile(folder.getPath() + "\\" + fileEntry.getName()))
-                System.out.println("File: " + folder.getName() + fileEntry + " succesfully storaged ");
+    public void getNewFilesOnFolder(final File file) {
+            if (readFile(file.getAbsolutePath()))
+                System.out.println("File: " + file + " succesfully storaged ");
         }
-    }
+
 
     public boolean readFile(String filePath) {
-        CustomerCollection.restartList();
-        SalesmanCollection.restartList();
+        InternalFileWriter.restartCounters();
         try {
-            BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(filePath), "ISO-8859-1"));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF8"));
             String line = bufferedReader.readLine();
             while (line != null) {
                 line = line.replace(" 00", "@00");
@@ -47,6 +44,7 @@ public class InternalFileReader {
         String[] separatedString = line.split("ç");
         FileObject file = Factory.getInstanceOfFactory().getInstanceOfFile(separatedString[0]);
         file.buildObject(separatedString);
+        file.addToCollection();
         return true;
     }
 }

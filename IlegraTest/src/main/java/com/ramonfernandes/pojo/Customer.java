@@ -1,5 +1,8 @@
 package com.ramonfernandes.pojo;
 
+import com.ramonfernandes.collections.CustomerCollection;
+import com.ramonfernandes.fileManager.InternalFileWriter;
+
 public class Customer implements FileObject {
     private String cnpj;
     private String name;
@@ -26,5 +29,10 @@ public class Customer implements FileObject {
                 .setCNPJ(separatedString[1])
                 .setName(separatedString[2])
                 .setBusinessArea(separatedString[3]);
+    }
+
+    @Override
+    public void addToCollection() {
+        CustomerCollection.addCustomer(this);
     }
 }

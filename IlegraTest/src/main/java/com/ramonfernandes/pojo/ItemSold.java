@@ -13,6 +13,10 @@ public class ItemSold implements FileObject {
         return this;
     }
 
+    @Override
+    public void addToCollection() {
+    }
+
     public int getItemQuantity() {
         return itemQuantity;
     }

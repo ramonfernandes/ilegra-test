@@ -1,5 +1,6 @@
 package com.ramonfernandes.pojo;
 
+import com.ramonfernandes.collections.SaleCollection;
 import com.ramonfernandes.collections.SalesmanCollection;
 
 import java.util.ArrayList;
@@ -58,5 +59,10 @@ public class Sale implements FileObject {
         return this
                 .setSaleID(Integer.parseInt(separatedString[1]))
                 .setSalesman(separatedString[3]);
+    }
+
+    @Override
+    public void addToCollection() {
+        SaleCollection.addSale(this);
     }
 }

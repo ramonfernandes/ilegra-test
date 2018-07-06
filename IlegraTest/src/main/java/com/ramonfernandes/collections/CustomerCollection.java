@@ -1,5 +1,6 @@
 package com.ramonfernandes.collections;
 
+import com.ramonfernandes.fileManager.InternalFileWriter;
 import com.ramonfernandes.pojo.Customer;
 import com.ramonfernandes.pojo.Sale;
 
@@ -11,7 +12,7 @@ public class CustomerCollection {
     private static List<Customer> customerList;
     private static CustomerCollection instance = new CustomerCollection();
 
-    private CustomerCollection(){
+    private CustomerCollection() {
         customerList = new ArrayList<Customer>();
     }
 
@@ -23,9 +24,15 @@ public class CustomerCollection {
         customerList = new ArrayList<Customer>();
     }
 
-    public void addCustomer(Customer customer){
-        if(!customerList.contains(customer))
+    public static void addCustomer(Customer customer) {
+        if (!customerList.contains(customer)) {
             customerList.add(customer);
+            InternalFileWriter.addCustomer();
+        }
+    }
+
+    public static void setCustomerList(ArrayList<Customer> list){
+        customerList = list;
     }
 
     public static List<Customer> getCustomerCollection() {

@@ -1,5 +1,7 @@
 package com.ramonfernandes.collections;
 
+import com.ramonfernandes.fileManager.InternalFileWriter;
+import com.ramonfernandes.pojo.Customer;
 import com.ramonfernandes.pojo.Salesman;
 
 import java.util.ArrayList;
@@ -29,9 +31,15 @@ public class SalesmanCollection {
         return result;
     }
 
-    public void addSalesman(Salesman salesman){
-        if(!salesmanList.contains(salesman))
+    public static void setSalesmanList(ArrayList<Salesman> list){
+        salesmanList = list;
+    }
+
+    public static void addSalesman(Salesman salesman){
+        if(!salesmanList.contains(salesman)) {
             salesmanList.add(salesman);
+            InternalFileWriter.addSalesman();
+        }
     }
 
     public static List<Salesman> getSalesmanList() {
