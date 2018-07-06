@@ -29,7 +29,7 @@ public class Sale implements FileObject {
         return this;
     }
 
-    public void addItamSold(ItemSold item) {
+    public void addItemSold(ItemSold item) {
         soldItems.add(item);
     }
 
