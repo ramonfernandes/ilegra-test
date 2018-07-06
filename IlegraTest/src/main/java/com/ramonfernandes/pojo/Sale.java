@@ -32,6 +32,22 @@ public class Sale implements FileObject {
         soldItems.add(item);
     }
 
+    public Salesman getSalesman(){
+        return salesman;
+    }
+
+    public int getSaleID(){
+        return saleID;
+    }
+
+    public int calculateSale(){
+        int result = 0;
+        for(ItemSold item : soldItems){
+            result += (item.getItemQuantity() * item.getPrice());
+        }
+        return result;
+    }
+
     @Override
     public FileObject buildObject(String[] separatedString) {
         for (String separatedSale : separatedString[2].split(",")) {

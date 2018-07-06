@@ -7,22 +7,18 @@ import java.util.List;
 
 public class SalesmanCollection {
 
-    private List<Salesman> salesmanList;
-    private static SalesmanCollection salesmanCollection = new SalesmanCollection();
-
+    private static List<Salesman> salesmanList;
+    private static SalesmanCollection instance = new SalesmanCollection();
     private SalesmanCollection(){
         salesmanList = new ArrayList<Salesman>();
     }
 
-    public static SalesmanCollection getInstanceOf(){
-        return salesmanCollection;
+    public static SalesmanCollection getInstanceOf() {
+        return instance;
     }
 
-    public Salesman getSalesmanByCNPJ(String cnpj){
-        for(Salesman salesman : salesmanList)
-            if(salesman.getCnpj().equals(cnpj))
-                return salesman;
-        return null;
+    public static void restartList() {
+        salesmanList = new ArrayList<Salesman>();
     }
 
     public List<Salesman> getSalesmanByName(String name){
@@ -31,5 +27,14 @@ public class SalesmanCollection {
             if(salesman.getName().equals(name))
                 result.add(salesman);
         return result;
+    }
+
+    public void addSalesman(Salesman salesman){
+        if(!salesmanList.contains(salesman))
+            salesmanList.add(salesman);
+    }
+
+    public static List<Salesman> getSalesmanList() {
+        return salesmanList;
     }
 }

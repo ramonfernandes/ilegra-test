@@ -1,5 +1,7 @@
-package com.ramonfernandes.filereader;
+package com.ramonfernandes.fileManager;
 
+import com.ramonfernandes.collections.CustomerCollection;
+import com.ramonfernandes.collections.SalesmanCollection;
 import com.ramonfernandes.factory.Factory;
 import com.ramonfernandes.pojo.FileObject;
 
@@ -21,6 +23,8 @@ public class InternalFileReader {
     }
 
     public boolean readFile(String filePath) {
+        CustomerCollection.restartList();
+        SalesmanCollection.restartList();
         try {
             BufferedReader bufferedReader = new BufferedReader(
                     new InputStreamReader(new FileInputStream(filePath), "ISO-8859-1"));
