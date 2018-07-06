@@ -5,6 +5,7 @@ import com.ramonfernandes.pojo.Customer;
 import com.ramonfernandes.pojo.ItemSold;
 import com.ramonfernandes.pojo.Sale;
 import com.ramonfernandes.pojo.Salesman;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,6 +55,13 @@ public class SaleTest {
     @Test
     public void bestSaleTest(){
         assert(SaleCollection.getMostExpensiveSale().getSaleID() == 2);
+    }
+
+    @Test
+    public void calculateSaleTest(){
+        Assert.assertEquals(100, sale1.calculateSale());
+        Assert.assertEquals(200, sale2.calculateSale());
+        Assert.assertEquals(300, sale3.calculateSale());
     }
 
 }
